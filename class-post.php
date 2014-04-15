@@ -75,6 +75,15 @@ class Post {
 	}
 
 	/**
+	 * Get the author for the post
+	 *
+	 * @return User
+	 */
+	public function get_author() {
+		return new User( $this->get_field( 'post_author' ) );
+	}
+
+	/**
 	* Get the permalink for the post
 	*
 	* @return string
