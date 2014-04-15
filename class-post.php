@@ -13,7 +13,7 @@ class Post {
 
 	public function __construct( $post ) {
 
-		if ( is_int( $post ) ) {
+		if ( is_numeric( $post ) ) {
 			$post = get_post( $post );
 		}
 
