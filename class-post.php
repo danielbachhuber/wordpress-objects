@@ -39,6 +39,15 @@ class Post {
 	}
 
 	/**
+	 * Set the title of the post
+	 *
+	 * @param string
+	 */
+	public function set_title( $title ) {
+		$this->set_field( 'post_title', $title );
+	}
+
+	/**
 	 * Get the excerpt for the post
 	 *
 	 * @return string
@@ -84,12 +93,117 @@ class Post {
 	}
 
 	/**
+	 * Set the author for this post
+	 *
+	 * @param mixed
+	 */
+	public function set_author( $author ) {
+
+		if ( is_numeric( $author ) ) {
+			$author = new User( $author );
+		}
+
+		$this->set_field( 'post_author', $author->get_id() );
+	}
+
+	/**
 	* Get the permalink for the post
 	*
 	* @return string
 	*/
 	public function get_permalink() {
 		return apply_filters( 'the_permalink', get_permalink( $this->get_id() ) );
+	}
+
+	/**
+	 * Set the post date for the post
+	 *
+	 * @param string
+	 */
+	public function set_post_date( $post_date ) {
+		$this->set_field( 'post_date', date( 'Y-m-s H:i:s', strtotime( $post_date ) ) );
+	}
+
+	/**
+	 * Set the post date gmt for the post
+	 *
+	 * @param string
+	 */
+	public function set_post_date_gmt( $post_date_gmt ) {
+		$this->set_field( 'post_date_gmt', date( 'Y-m-s H:i:s', strtotime( $post_date_gmt ) ) );
+	}
+
+	/**
+	 * Set the post modified for the post
+	 *
+	 * @param string
+	 */
+	public function set_post_modified( $post_modified ) {
+		$this->set_field( 'post_modified', date( 'Y-m-s H:i:s', strtotime( $post_modified ) ) );
+	}
+
+	/**
+	 * Set the post modified gmt for the post
+	 *
+	 * @param string
+	 */
+	public function set_post_modified_gmt( $post_modified_gmt ) {
+		$this->set_field( 'post_modified_gmt', date( 'Y-m-s H:i:s', strtotime( $post_modified_gmt ) ) );
+	}
+
+
+	/**
+	 * Get the featured image ID for the post
+	 *
+	 * @return int|false
+	 */
+	public function get_featured_image_id() {
+		return (int) $this->get_meta( '_thumbnail_id' );
+	}
+
+	/**
+	 * Set the featured image for the post
+	 *
+	 * @param int $featured_image_id
+	 */
+	public function set_featured_image_id( $featured_image_id ) {
+		$this->set_meta( '_thumbnail_id', (int) $featured_image_id );
+	}
+
+	/**
+	 * Get the categories of the post
+	 *
+	 * @return array
+	 */
+	public function get_categories() {
+		return $this->get_taxonomy_terms( 'category' );
+	}
+
+	/**
+	 * Set the categories for the post
+	 *
+	 * @param
+	 */
+	public function set_categories( $categories ) {
+		$this->set_taxonomy_terms( 'category', $categories );
+	}
+
+	/**
+	 * Get the tags of the post
+	 *
+	 * @return array
+	 */
+	public function get_tags() {
+		return $this->get_taxonomy_terms( 'post_tag' );
+	}
+
+	/**
+	 * Set the tags for the post
+	 *
+	 * @param
+	 */
+	public function set_tags( $tags ) {
+		$this->set_taxonomy_terms( 'post_tag', $tags );
 	}
 
 	/**
@@ -141,5 +255,70 @@ class Post {
 		$this->post = get_post( $this->get_id() );
 	}
 
+	/**
+	 * Get a meta value for a post
+	 *
+	 * @param string
+	 * @return mixed
+	 */
+	protected function get_meta( $key ) {
+		return get_post_meta( $this->get_id(), $key, true );
+	}
+
+	/**
+	 * Set a meta value for a post
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	protected function set_meta( $key, $value ) {
+		update_post_meta( $this->get_id(), $key, $value );
+	}
+
+	/**
+	 * Get the taxonomy terms for a post
+	 *
+	 * @param string $taxonomy
+	 * @return array|false
+	 */
+	protected function get_taxonomy_terms( $taxonomy ) {
+
+		$terms = get_the_terms( $this->get_id(), $taxonomy );
+		if ( $terms && ! is_wp_error( $terms ) ) {
+			return $terms;
+		} else {
+			return false;
+		}
+
+	}
+
+	/**
+	 * Set taxonomy terms for a post
+	 *
+	 * @param string $taxonomy
+	 * @param array $terms Array of term names or term objects
+	 */
+	protected function set_taxonomy_terms( $taxonomy, $terms ) {
+
+		if ( ! is_array( $terms ) ) {
+			return false;
+		}
+
+		// Maybe this was an array of objects
+		$first_term = $terms[0];
+		if ( is_object( $first_term ) ) {
+			$terms = wp_list_pluck( $terms, 'name' );
+		}
+
+		// Terms need to exist in order to use wp_set_object_terms(), sadly
+		$existing_terms = get_terms( $taxonomy, array( 'hide_empty' => false, 'fields' => 'names' ) );
+		$terms_to_create = array_diff( $terms, $existing_terms );
+
+		foreach( $terms_to_create as $term_to_create ) {
+			wp_insert_term( $term_to_create, $taxonomy );
+		}
+
+		wp_set_object_terms( $this->get_id(), array_map( 'sanitize_title', $terms ), $taxonomy );
+	}
 
 }
