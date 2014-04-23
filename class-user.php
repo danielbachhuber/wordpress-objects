@@ -20,6 +20,22 @@ class User {
 	}
 
 	/**
+	 * Create a new user in the database
+	 *
+	 * @param string $user_login
+	 * @return User|WP_Error
+	 */
+	public static function create( $user_login ) {
+
+		$user_id = wp_insert_user( array( 'user_login' => $user_login, 'user_pass' => wp_generate_password() ) );
+		if ( is_wp_error( $user_id ) ) {
+			return $user_id;
+		}
+
+		return new User( $user_id );
+	}
+
+	/**
 	 * Get the ID for the user
 	 *
 	 * @return int
@@ -38,12 +54,39 @@ class User {
 	}
 
 	/**
+	 * Set the display name for the user
+	 *
+	 * @param string $display_name
+	 */
+	public function set_display_name( $display_name ) {
+		$this->set_field( 'display_name', $display_name );
+	}
+
+	/**
 	 * Get the user login value for the user
 	 *
 	 * @return string
 	 */
 	public function get_user_login() {
 		return $this->get_field( 'user_login' );
+	}
+
+	/**
+	 * Get the email address for the user
+	 *
+	 * @return string
+	 */
+	public function get_email() {
+		return $this->get_field( 'user_email' );
+	}
+
+	/**
+	 * Set the email address for the user
+	 *
+	 * @param string $email
+	 */
+	public function set_email( $email ) {
+		$this->set_field( 'user_email', $email );
 	}
 
 	/**
@@ -57,6 +100,24 @@ class User {
 	}
 
 	/**
+	 * Get the description for the user
+	 *
+	 * @return string
+	 */
+	public function get_description() {
+		return $this->get_meta( 'description' );
+	}
+
+	/**
+	 * Set the description for the user
+	 *
+	 * @param string
+	 */
+	public function set_description( $description ) {
+		$this->set_meta( 'description', $description );
+	}
+
+	/**
 	 * Get a user's field
 	 *
 	 * @param string $key
@@ -64,6 +125,41 @@ class User {
 	 */
 	protected function get_field( $key ) {
 		return $this->user->$key;
+	}
+
+	/**
+	 * Set a field for a user
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	protected function set_field( $key, $value ) {
+		global $wpdb;
+
+		$wpdb->update( $wpdb->users, array( $key => $value ), array( 'ID' => $this->get_id() ) );
+		clean_user_cache( $this->get_id() );
+
+		$this->user = get_user_by( 'id', $this->get_id() );
+	}
+
+	/**
+	 * Get a meta value for a user
+	 *
+	 * @param string
+	 * @return mixed
+	 */
+	protected function get_meta( $key ) {
+		return get_user_meta( $this->get_id(), $key, true );
+	}
+
+	/**
+	 * Set a meta value for a user
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	protected function set_meta( $key, $value ) {
+		update_user_meta( $this->get_id(), $key, $value );
 	}
 
 }
