@@ -116,12 +116,30 @@ class Post {
 	}
 
 	/**
+	 * Get the post date for the post
+	 *
+	 * @return string
+	 */
+	public function get_post_date() {
+		return $this->get_field( 'post_date' );
+	}
+
+	/**
 	 * Set the post date for the post
 	 *
 	 * @param string
 	 */
 	public function set_post_date( $post_date ) {
 		$this->set_field( 'post_date', date( 'Y-m-s H:i:s', strtotime( $post_date ) ) );
+	}
+
+	/**
+	 * Get the post date gmt for the post
+	 *
+	 * @return string
+	 */
+	public function get_post_date_gmt() {
+		return $this->get_field( 'post_date_gmt' );
 	}
 
 	/**
@@ -134,12 +152,30 @@ class Post {
 	}
 
 	/**
+	 * Get the post modified date for the post
+	 *
+	 * @return string
+	 */
+	public function get_post_modified() {
+		return $this->get_field( 'post_modified' );
+	}
+
+	/**
 	 * Set the post modified for the post
 	 *
 	 * @param string
 	 */
 	public function set_post_modified( $post_modified ) {
 		$this->set_field( 'post_modified', date( 'Y-m-s H:i:s', strtotime( $post_modified ) ) );
+	}
+
+	/**
+	 * Get the post modified date for the post
+	 *
+	 * @return string
+	 */
+	public function get_post_modified_gmt() {
+		return $this->get_field( 'post_modified_gmt' );
 	}
 
 	/**
@@ -150,7 +186,6 @@ class Post {
 	public function set_post_modified_gmt( $post_modified_gmt ) {
 		$this->set_field( 'post_modified_gmt', date( 'Y-m-s H:i:s', strtotime( $post_modified_gmt ) ) );
 	}
-
 
 	/**
 	 * Get the featured image ID for the post
