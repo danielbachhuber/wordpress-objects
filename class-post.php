@@ -216,6 +216,24 @@ class Post {
 	}
 
 	/**
+	 * Get the parent id for the post
+	 *
+	 * @return string
+	 */
+	public function get_parent_id() {
+		return (int) $this->get_field( 'post_parent' );
+	}
+
+	/**
+	 * Set the parent id of the post
+	 *
+	 * @param int
+	 */
+	public function set_parent_id( $parent_id ) {
+		$this->set_field( 'post_parent', $parent_id );
+	}
+
+	/**
 	 * Get the featured image ID for the post
 	 *
 	 * @return int|false
