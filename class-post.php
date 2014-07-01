@@ -35,7 +35,14 @@ class Post {
 	 * @return string
 	 */
 	public function get_title() {
-		return apply_filters( 'the_title', $this->get_field( 'post_title' ) );
+		return $this->get_field( 'post_title' );
+	}
+
+	/**
+	 * Print the title for the post
+	 */
+	public function the_title() {
+		echo apply_filters( 'the_title', $this->get_title() );
 	}
 
 	/**
@@ -53,7 +60,14 @@ class Post {
 	 * @return string
 	 */
 	public function get_excerpt() {
-		return apply_filters( 'the_excerpt', $this->get_field( 'post_excerpt' ) );
+		return $this->get_field( 'post_excerpt' );
+	}
+
+	/**
+	 * Print the excerpt for the post
+	 */
+	public function the_excerpt() {
+		echo apply_filters( 'the_excerpt', $this->get_excerpt() );
 	}
 
 	/**
@@ -71,7 +85,14 @@ class Post {
 	 * @return string
 	 */
 	public function get_content() {
-		return apply_filters( 'the_content', $this->get_field( 'post_content' ) );
+		return $this->get_field( 'post_content' );
+	}
+
+	/**
+	 * Print the content for the post
+	 */
+	public function the_content() {
+		echo apply_filters( 'the_content', $this->get_content() );
 	}
 
 	/**
@@ -107,12 +128,19 @@ class Post {
 	}
 
 	/**
-	* Get the permalink for the post
-	*
-	* @return string
-	*/
+	 * Get the permalink for the post
+	 *
+	 * @return string
+	 */
 	public function get_permalink() {
-		return apply_filters( 'the_permalink', get_permalink( $this->get_id() ) );
+		return get_permalink( $this->get_id() );
+	}
+
+	/**
+	 * Print the permalink for the post
+	 */
+	public function the_permalink() {
+		echo apply_filters( 'the_permalink', $this->get_permalink() );
 	}
 
 	/**
