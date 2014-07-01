@@ -63,6 +63,42 @@ class User {
 	}
 
 	/**
+	 * Get the first name for a user
+	 *
+	 * @return string
+	 */
+	public function get_first_name() {
+		return $this->get_meta( 'first_name' );
+	}
+
+	/**
+	 * Set the first name for the user
+	 *
+	 * @param string $first_name
+	 */
+	public function set_first_name( $first_name ) {
+		$this->set_meta( 'first_name', $first_name );
+	}
+
+	/**
+	 * Get the last name for a user
+	 *
+	 * @return string
+	 */
+	public function get_last_name() {
+		return $this->get_meta( 'last_name' );
+	}
+
+	/**
+	 * Set the last name for the user
+	 *
+	 * @param string $last_name
+	 */
+	public function set_last_name( $last_name ) {
+		$this->set_meta( 'last_name', $last_name );
+	}
+
+	/**
 	 * Get the user login value for the user
 	 *
 	 * @return string
