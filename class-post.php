@@ -250,6 +250,26 @@ class Post {
 	public function set_featured_image_id( $featured_image_id ) {
 		$this->set_meta( '_thumbnail_id', (int) $featured_image_id );
 	}
+	
+	/**
+	 * Get the featured image url for the given featured image id
+	 *
+	 * @param string $size
+	 * @return string|false
+	 */
+	 public function get_featured_image_url( $size = 'full' ) {
+
+		$attachment_id = $this->get_featured_image_id();
+		if ( ! $attachment_id ) {
+			return false;
+		}
+		$src = wp_get_attachment_image_src( $attachment_id );
+		if ( ! $src ) {
+			return false;
+		}
+
+		return $src[0];
+	 }
 
 	/**
 	 * Get the categories of the post
