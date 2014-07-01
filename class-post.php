@@ -7,9 +7,9 @@ namespace WordPress_Objects;
  */
 class Post {
 
-	private $post;
+	protected $post;
 
-	private static $post_type = 'post';
+	protected static $post_type = 'post';
 
 	public function __construct( $post ) {
 
@@ -295,7 +295,7 @@ class Post {
 	public static function create( $args = array() ) {
 
 		$defaults = array(
-			'post_type'     => self::$post_type,
+			'post_type'     => static::$post_type,
 			'post_status'   => 'draft',
 			'post_author'   => get_current_user_id(),
 			);
