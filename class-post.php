@@ -263,13 +263,13 @@ class Post {
 		if ( ! $attachment_id ) {
 			return false;
 		}
-		$src = wp_get_attachment_image_src( $attachment_id );
+		$src = wp_get_attachment_image_src( $attachment_id, $size );
 		if ( ! $src ) {
 			return false;
 		}
 
 		return $src[0];
-	 }
+	}
 
 	/**
 	 * Get the categories of the post
