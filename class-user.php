@@ -13,6 +13,10 @@ class User {
 
 		if ( is_numeric( $user ) ) {
 			$user = get_user_by( 'id', $user );
+		} else if ( is_email( $user ) ) {
+			$user = get_user_by( 'email', $user );
+		} else if ( is_string( $user ) ) {
+			$user = get_user_by( 'login', $user );
 		}
 
 		$this->user = $user;
