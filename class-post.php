@@ -412,11 +412,10 @@ class Post {
 		}
 
 		// Terms need to exist in order to use wp_set_object_terms(), sadly
-		$existing_terms = get_terms( $taxonomy, array( 'hide_empty' => false, 'fields' => 'names' ) );
-		$terms_to_create = array_diff( $terms, $existing_terms );
-
-		foreach( $terms_to_create as $term_to_create ) {
-			wp_insert_term( $term_to_create, $taxonomy );
+		foreach( $terms as $term ) {
+			if ( ! get_term_by( 'name', $term, $taxonomy ) ) {
+				wp_insert_term( $term, $taxonomy );
+			}
 		}
 
 		wp_set_object_terms( $this->get_id(), array_map( 'sanitize_title', $terms ), $taxonomy );
