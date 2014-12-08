@@ -26,7 +26,7 @@ class Post {
 	 * @return int
 	 */
 	public function get_id() {
-		return $this->get_field( 'ID' );
+		return (int) $this->get_field( 'ID' );
 	}
 
 	/**
