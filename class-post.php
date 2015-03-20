@@ -158,7 +158,7 @@ class Post {
 	 * @param string
 	 */
 	public function set_post_date( $post_date ) {
-		$this->set_field( 'post_date', date( 'Y-m-s H:i:s', strtotime( $post_date ) ) );
+		$this->set_field( 'post_date', date( 'Y-m-d H:i:s', strtotime( $post_date ) ) );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Post {
 	 * @param string
 	 */
 	public function set_post_date_gmt( $post_date_gmt ) {
-		$this->set_field( 'post_date_gmt', date( 'Y-m-s H:i:s', strtotime( $post_date_gmt ) ) );
+		$this->set_field( 'post_date_gmt', date( 'Y-m-d H:i:s', strtotime( $post_date_gmt ) ) );
 	}
 
 	/**
@@ -194,7 +194,7 @@ class Post {
 	 * @param string
 	 */
 	public function set_post_modified( $post_modified ) {
-		$this->set_field( 'post_modified', date( 'Y-m-s H:i:s', strtotime( $post_modified ) ) );
+		$this->set_field( 'post_modified', date( 'Y-m-d H:i:s', strtotime( $post_modified ) ) );
 	}
 
 	/**
@@ -212,7 +212,7 @@ class Post {
 	 * @param string
 	 */
 	public function set_post_modified_gmt( $post_modified_gmt ) {
-		$this->set_field( 'post_modified_gmt', date( 'Y-m-s H:i:s', strtotime( $post_modified_gmt ) ) );
+		$this->set_field( 'post_modified_gmt', date( 'Y-m-d H:i:s', strtotime( $post_modified_gmt ) ) );
 	}
 
 	/**
@@ -250,7 +250,7 @@ class Post {
 	public function set_featured_image_id( $featured_image_id ) {
 		$this->set_meta( '_thumbnail_id', (int) $featured_image_id );
 	}
-	
+
 	/**
 	 * Get the featured image url for the given featured image id
 	 *
