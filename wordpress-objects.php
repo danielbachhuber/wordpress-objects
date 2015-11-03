@@ -7,4 +7,5 @@
  */
 
 require_once dirname( __FILE__ ) . '/class-post.php';
+require_once dirname( __FILE__ ) . '/class-attachment.php';
 require_once dirname( __FILE__ ) . '/class-user.php';
