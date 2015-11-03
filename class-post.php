@@ -148,7 +148,7 @@ class Post {
 	 *
 	 * @return string
 	 */
-	public function get_post_date() {
+	public function get_date() {
 		return $this->get_field( 'post_date' );
 	}
 
@@ -157,7 +157,7 @@ class Post {
 	 *
 	 * @param string
 	 */
-	public function set_post_date( $post_date ) {
+	public function set_date( $post_date ) {
 		$this->set_field( 'post_date', date( 'Y-m-d H:i:s', strtotime( $post_date ) ) );
 	}
 
@@ -166,7 +166,7 @@ class Post {
 	 *
 	 * @return string
 	 */
-	public function get_post_date_gmt() {
+	public function get_date_gmt() {
 		return $this->get_field( 'post_date_gmt' );
 	}
 
@@ -175,7 +175,7 @@ class Post {
 	 *
 	 * @param string
 	 */
-	public function set_post_date_gmt( $post_date_gmt ) {
+	public function set_date_gmt( $post_date_gmt ) {
 		$this->set_field( 'post_date_gmt', date( 'Y-m-d H:i:s', strtotime( $post_date_gmt ) ) );
 	}
 
@@ -184,7 +184,7 @@ class Post {
 	 *
 	 * @return string
 	 */
-	public function get_post_modified() {
+	public function get_modified() {
 		return $this->get_field( 'post_modified' );
 	}
 
@@ -193,7 +193,7 @@ class Post {
 	 *
 	 * @param string
 	 */
-	public function set_post_modified( $post_modified ) {
+	public function set_modified( $post_modified ) {
 		$this->set_field( 'post_modified', date( 'Y-m-d H:i:s', strtotime( $post_modified ) ) );
 	}
 
@@ -202,7 +202,7 @@ class Post {
 	 *
 	 * @return string
 	 */
-	public function get_post_modified_gmt() {
+	public function get_modified_gmt() {
 		return $this->get_field( 'post_modified_gmt' );
 	}
 
@@ -211,7 +211,7 @@ class Post {
 	 *
 	 * @param string
 	 */
-	public function set_post_modified_gmt( $post_modified_gmt ) {
+	public function set_modified_gmt( $post_modified_gmt ) {
 		$this->set_field( 'post_modified_gmt', date( 'Y-m-d H:i:s', strtotime( $post_modified_gmt ) ) );
 	}
 
