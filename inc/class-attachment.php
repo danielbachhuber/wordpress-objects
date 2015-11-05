@@ -32,7 +32,7 @@ class Attachment extends Post {
 	 * @param array $args
 	 * @return array|false
 	 */
-	public function get_src( $size, $args ) {
+	public function get_src( $size, $args = array() ) {
 		return wp_get_attachment_image_src( $this->get_id(), $size );
 	}
 
