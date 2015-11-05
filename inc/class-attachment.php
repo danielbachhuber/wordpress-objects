@@ -26,15 +26,14 @@ class Attachment extends Post {
 	}
 
 	/**
-	 * Get the standard WP $src array, but potentially resized
+	 * Get the standard WP $src array
 	 *
 	 * @param string $size
 	 * @param array $args
 	 * @return array|false
 	 */
-	private function get_src( $size, $args ) {
-		$src = wp_get_attachment_image_src( $this->get_id(), $size );
-		return $this->maybe_resize_image_src( $src, $args );
+	public function get_src( $size, $args ) {
+		return wp_get_attachment_image_src( $this->get_id(), $size );
 	}
 
 	/**
