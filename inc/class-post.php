@@ -234,6 +234,15 @@ class Post {
 	}
 
 	/**
+	 * Get the type of post
+	 *
+	 * @return string
+	 */
+	public function get_type() {
+		return $this->post->post_type;
+	}
+
+	/**
 	 * Get the featured image ID for the post
 	 *
 	 * @return int|false
