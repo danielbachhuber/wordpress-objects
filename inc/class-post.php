@@ -389,7 +389,7 @@ class Post {
 	 * Get the taxonomy terms for a post
 	 *
 	 * @param string $taxonomy
-	 * @return array|false
+	 * @return array
 	 */
 	protected function get_taxonomy_terms( $taxonomy ) {
 
@@ -397,7 +397,7 @@ class Post {
 		if ( $terms && ! is_wp_error( $terms ) ) {
 			return $terms;
 		} else {
-			return false;
+			return array();
 		}
 
 	}
