@@ -73,6 +73,24 @@ class Post {
 	}
 
 	/**
+	 * Get the status for the post
+	 *
+	 * @return string
+	 */
+	public function get_status() {
+		return $this->get_field( 'post_status' );
+	}
+
+	/**
+	 * Set the slug of the post
+	 *
+	 * @param string
+	 */
+	public function set_status( $status ) {
+		$this->set_field( 'post_status', $status );
+	}
+
+	/**
 	 * Get the excerpt for the post
 	 *
 	 * @return string
